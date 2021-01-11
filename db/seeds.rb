@@ -3,7 +3,7 @@ require 'faker'
 categories = 10.times.map do  
   Category.create(
     {    
-      name: Faker::Commerce.material
+      name: Faker::Commerce.unique.material
     }
   )
 end
