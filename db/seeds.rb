@@ -8,7 +8,7 @@ categories = 10.times.map do
   )
 end
 
-products = 100.times.map do  
+products = 1000.times.map do  
   Product.create(
     {    
       name: Faker::Commerce.product_name,
