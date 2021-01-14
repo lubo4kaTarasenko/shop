@@ -12,8 +12,11 @@ class Api::ProductsController < ActionController::API
   end
 
   def get_list
+    price_from  = params[:pr_f]
+    price_to = params[:pr_t]
     scp = Product.search(params[:q]).includes(:category)
-    
+    scp = scp.where('price >= ?', price_from.to_f)  if price_from.present? && price_from != 'undefined'
+    scp = scp.where('price <= ?', price_to.to_f)  if  price_to.present? && price_to != 'undefined'
     if params[:f] == 'A...Z'
       scp = scp.order(name: :asc)
     elsif params[:f] == 'Z...A'
