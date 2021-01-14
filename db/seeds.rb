@@ -12,8 +12,10 @@ products = 1000.times.map do
   Product.create(
     {    
       name: Faker::Commerce.product_name,
-      price: Faker::Commerce.price,
-      category: categories.sample 
+      price: Faker::Commerce.price(range: 1..999.0),
+      category: categories.sample,
+      country: Faker::Address.country,
+      description: Faker::Markdown.emphasis
     }
   )
 end
