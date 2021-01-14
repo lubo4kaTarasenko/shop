@@ -11,6 +11,11 @@ class Api::ProductsController < ActionController::API
     render json: { products: products, pages: pages_count }
   end
 
+  def show
+    product = Product.find_by(url_name: params[:name])
+    render json: { product: product}
+  end
+
   def get_list
     price_from  = params[:pr_f]
     price_to = params[:pr_t]

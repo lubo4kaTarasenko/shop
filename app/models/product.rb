@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :category
+  before_save :add_url_name
 
   #paginates_per 28
 
@@ -9,5 +10,11 @@ class Product < ApplicationRecord
     else
       where('name ILIKE ?', "%#{pattern}%")
     end
+  end
+
+  private
+
+  def add_url_name
+    self.url_name = self.name.gsub(' ', '_') 
   end
 end
