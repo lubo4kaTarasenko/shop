@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root = 'home#index'
   root to: root
 
+  get '/', to: root
   get '/:Warriors', to: root
   get '/:Unforgiven/:Two', to: root
   get '/:Back/:In/:Black', to: root
