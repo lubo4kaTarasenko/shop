@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get '/:Back/:In/:Black', to: root
   get '/:Born/:To/:Be/:Wild', to: root
   get '/:Rock/:To/:Like/:a/:Hurricane', to: root
-  get '/:I/:Was/:Made/:For/:Lovin/:You', to: root  
+  get '/:I/:Was/:Made/:For/:Lovin/:You', to: root
 end

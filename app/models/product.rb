@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   belongs_to :category
   before_save :add_url_name
 
-  #paginates_per 28
+  # paginates_per 28
 
   def self.search(pattern)
     if pattern.blank?
@@ -15,6 +15,6 @@ class Product < ApplicationRecord
   private
 
   def add_url_name
-    self.url_name = self.name.gsub(' ', '_') 
+    self.url_name = name.gsub(' ', '_')
   end
 end
