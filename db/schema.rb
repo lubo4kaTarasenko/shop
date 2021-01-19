@@ -10,34 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_114_121_706) do
+ActiveRecord::Schema.define(version: 2021_01_19_202316) do
+
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'categories', force: :cascade do |t|
-    t.string 'name'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table 'products', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'price'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
-    t.bigint 'category_id'
-    t.text 'description'
-    t.string 'country'
-    t.string 'url_name'
-    t.index ['category_id'], name: 'index_products_on_category_id'
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id"
+    t.text "description"
+    t.string "country"
+    t.string "url_name"
+    t.bigint "subcategory_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email'
-    t.string 'password_digest'
-    t.datetime 'created_at', precision: 6, null: false
-    t.datetime 'updated_at', precision: 6, null: false
+  create_table "subcategories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_subcategories_on_category_id"
   end
 
-  add_foreign_key 'products', 'categories'
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "products", "categories"
+  add_foreign_key "products", "subcategories"
+  add_foreign_key "subcategories", "categories"
 end
