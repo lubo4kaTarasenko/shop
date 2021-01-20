@@ -3,7 +3,8 @@ class Api::ProductsController < ActionController::API
     scp = get_list
     products = scp.page(params[:p]).per(24).map do |p|
       p.attributes.merge(
-        category: p.category.name
+        category: p.category.name,
+        subcategory: p.subcategory.name
       )
     end
 
@@ -19,7 +20,7 @@ class Api::ProductsController < ActionController::API
   def get_list
     price_from = params[:pr_f]
     price_to = params[:pr_t]
-    scp = Product.search(params[:q]).includes(:category)
+    scp = Product.search(params[:q]).includes(:category).includes(:subcategory)
     scp = scp.where('price >= ?', price_from.to_f) if price_from.present? && price_from != 'undefined'
     scp = scp.where('price <= ?', price_to.to_f)  if price_to.present? && price_to != 'undefined'    
 
