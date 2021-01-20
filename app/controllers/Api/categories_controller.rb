@@ -1,9 +1,8 @@
 class Api::CategoriesController < ActionController::API
   def index
-    categories = Category.all.map do |c|
+    categories = Category.all.includes(:subcategories).map do |c|
       c.attributes.merge(
-        name: c.name,
-        id: c.id
+        subcategories: c.subcategories.map(&:name)
       )
     end
     render json: { categories: categories }
