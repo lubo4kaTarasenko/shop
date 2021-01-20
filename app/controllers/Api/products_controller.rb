@@ -21,10 +21,13 @@ class Api::ProductsController < ActionController::API
     price_to = params[:pr_t]
     scp = Product.search(params[:q]).includes(:category)
     scp = scp.where('price >= ?', price_from.to_f) if price_from.present? && price_from != 'undefined'
-    scp = scp.where('price <= ?', price_to.to_f)  if price_to.present? && price_to != 'undefined'
-    scp = scp.where(category_id: params[:c].to_i) if params[:c].present? && params[:c] != 'undefined'
+    scp = scp.where('price <= ?', price_to.to_f)  if price_to.present? && price_to != 'undefined'    
 
-    scp = scp.where(subcategory_id: Subcategory.find_by(name: params[:sc]).id) if params[:sc].present? && params[:sc] != 'undefined'
+    if params[:sc].present? && params[:sc] != 'undefined'
+      scp = scp.where(subcategory_id: Subcategory.find_by(name: params[:sc]).id) 
+    else
+      scp = scp.where(category_id: params[:c].to_i) if params[:c].present? && params[:c] != 'undefined'
+    end
 
     if params[:f] == 'A...Z'
       scp = scp.order(name: :asc)
