@@ -1,12 +1,12 @@
 class Api::ProductsController < ActionController::API
  
-  def current_user
-    if Rails.env.development?
-      User.last
-    else
-      super
-    end
-  end
+  #def current_user
+   # if Rails.env.development?
+      #User.last
+    #else
+      #super
+   # end
+ # end
 
   def index
     scp = get_list
