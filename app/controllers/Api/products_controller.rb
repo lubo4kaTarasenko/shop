@@ -1,4 +1,13 @@
 class Api::ProductsController < ActionController::API
+ 
+  def current_user
+    if Rails.env.development?
+      User.last
+    else
+      super
+    end
+  end
+
   def index
     scp = get_list
     products = scp.page(params[:p]).per(24).map do |p|
@@ -9,7 +18,14 @@ class Api::ProductsController < ActionController::API
     end
 
     pages_count = (scp.count / 24).ceil
-    render json: { products: products, pages: pages_count }
+    Rails.logger.info("user:" + current_user.inspect)
+    if current_user
+      user = {
+        token: current_user.token,
+        email: current_user.email
+      }
+    end
+    render json: { products: products, pages: pages_count, user: user }
   end
 
   def show
