@@ -8,8 +8,10 @@ class Api::OrdersController < ActionController::API
     end
 
     order.order_products.create(product_params)
+    total = order.order_products.to_a.sum { |op| op.number * op.product.price }
+    order.update(total_price: total)
 
     html = File.read(Rails.root.join('public/index.html').to_s)
     render html: html.html_safe
   end
-end
+end 
