@@ -1,4 +1,4 @@
-require 'faker'
+=begin require 'faker'
 categories_names = %w[computers electronics books sport home]
 subcategories_c = %w[monitors accessories networking drives software]
 subcategories_e = %w[games car tv camera]
@@ -67,4 +67,5 @@ products = 1000.times.map do
       description: Faker::Markdown.emphasis
     }
   )
-end
+=end 
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?

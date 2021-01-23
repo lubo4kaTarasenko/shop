@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   devise_for :users
   get '/products', to: 'api/products#index'
   get '/product', to: 'api/products#show'
   get '/categories', to: 'api/categories#index'
+  post '/order', to: 'api/orders#create'
 
   root = 'home#index'
 

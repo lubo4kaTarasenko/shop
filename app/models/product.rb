@@ -1,6 +1,9 @@
 class Product < ApplicationRecord
   belongs_to :category
   belongs_to :subcategory
+  
+  has_many :order_products
+  has_many :orders, through: :order_products
   before_save :add_url_name
 
   # paginates_per 28
