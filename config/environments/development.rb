@@ -34,6 +34,7 @@ Rails.application.configure do
   config.active_storage.service = :local
   config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
 
+  config.action_mailer.delivery_method = :sendmail
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = false
 
@@ -47,10 +48,9 @@ Rails.application.configure do
   port:                 587,
   domain:               'example.com',
   user_name:            'shop67947@gmail.com',
-  password:             'ilovebigpennis',
+  password:             'ilovebigtennis',
   authentication:       'plain',
   enable_starttls_auto: true }
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 

@@ -16,7 +16,7 @@ Rails.application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
-
+  config.action_mailer.delivery_method = :sendmail
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
@@ -29,7 +29,7 @@ Rails.application.configure do
   port:                 587,
   domain:               'example.com',
   user_name:            'shop67947@gmail.com',
-  password:             'ilovebigpennis',
+  password:             'ilovebigtennis',
   authentication:       'plain',
   enable_starttls_auto: true }
 
