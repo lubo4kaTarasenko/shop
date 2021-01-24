@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_165519) do
+ActiveRecord::Schema.define(version: 2021_01_24_153248) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2021_01_23_165519) do
     t.string "country"
     t.string "url_name"
     t.bigint "subcategory_id"
+    t.string "image", default: "https://res.cloudinary.com/dmqyv6xea/image/upload/v1611501893/shop/ava_ijli5n.jpg"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["subcategory_id"], name: "index_products_on_subcategory_id"
   end

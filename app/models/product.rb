@@ -4,7 +4,9 @@ class Product < ApplicationRecord
   
   has_many :order_products
   has_many :orders, through: :order_products
+  mount_uploader :image, ImageUploader
   before_save :add_url_name
+
 
   # paginates_per 28
 
@@ -21,4 +23,5 @@ class Product < ApplicationRecord
   def add_url_name
     self.url_name = name.downcase.gsub(' ', '-')
   end
+
 end

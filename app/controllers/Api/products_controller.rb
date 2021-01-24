@@ -12,6 +12,7 @@ class Api::ProductsController < ActionController::API
     scp = get_list
     products = scp.page(params[:p]).per(24).map do |p|
       p.attributes.merge(
+        image: p.image&.url,
         category: p.category.name,
         subcategory: p.subcategory.name
       )
@@ -30,7 +31,7 @@ class Api::ProductsController < ActionController::API
 
   def show
     product = Product.find_by(url_name: params[:name])
-    render json: { product: product }
+    render json: { product: product.attributes.merge(image: product.image&.url ) }
   end
 
   def get_list
