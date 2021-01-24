@@ -1,4 +1,5 @@
 class Api::ProductsController < ActionController::API
+  PAGE = 24
  
   #def current_user
    # if Rails.env.development?
@@ -10,7 +11,7 @@ class Api::ProductsController < ActionController::API
 
   def index
     scp = get_list
-    products = scp.page(params[:p]).per(24).map do |p|
+    products = scp.page(params[:p]).per(PAGE).map do |p|
       p.attributes.merge(
         image: p.image&.url,
         category: p.category.name,
@@ -18,7 +19,7 @@ class Api::ProductsController < ActionController::API
       )
     end
 
-    pages_count = (scp.count / 24).ceil
+    pages_count = (scp.count.to_f / PAGE).ceil
     Rails.logger.info("user:" + current_user.inspect)
     if current_user
       user = {
