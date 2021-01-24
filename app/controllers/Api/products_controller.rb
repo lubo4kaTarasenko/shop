@@ -1,16 +1,8 @@
 class Api::ProductsController < ActionController::API
   PAGE = 24
- 
-  #def current_user
-   # if Rails.env.development?
-      #User.last
-    #else
-      #super
-   # end
- # end
 
   def index
-    scp = get_list
+    scp = get_list.order(updated_at: :desc)
     products = scp.page(params[:p]).per(PAGE).map do |p|
       p.attributes.merge(
         image: p.image&.url,
