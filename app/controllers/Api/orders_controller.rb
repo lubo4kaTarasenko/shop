@@ -11,13 +11,15 @@ class Api::OrdersController < ActionController::API
     total = order.order_products.to_a.sum { |op| op.number * op.product.price }
     order.update(total_price: total)
 
-    complete_order
+    complete_order(order)
 
-    html = File.read(Rails.root.join('public/index.html').to_s)
-    render html: html.html_safe
+    #html = File.read(Rails.root.join('public/index.html').to_s)
+    #render html: html.html_safe
+    render json: { next: root_url(message: 'order completed. please, check your email') }
+   #redirect_to root_path(message: 'order completed. please, check your email') 
   end
 
-  def complete_order
-    OrderMailer.with(user_email: params[:email]).order_email.deliver_now
+  def complete_order(order)
+    OrderMailer.with(user_email: params[:email], order: order).order_email.deliver_now
   end
 end 

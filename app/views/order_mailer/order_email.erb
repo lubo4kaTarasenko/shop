@@ -4,7 +4,22 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hello</h1>
-    
+    <div>
+      <h1 >Hello</h1>
+      <div>Thank you for choosing our shop.</div>
+      <div>Our manager will call you soon.</div>
+      <div>Your order information here</div>
+      <table>
+        <% @order.order_products.each do |op|%>
+          <tr>
+            <td style='padding: 10px'> <img src='<%= op.product.image.url%>' width='50px'/> </td>
+            <td style='padding: 10px'><%= op.product.name %> </td> 
+            <td style='padding: 10px'><%= op.number %>  </td>
+            <td style='padding: 10px'><b><%= op.product.price %>$</b> </td>
+          </tr>
+        <% end %>
+      </table>
+      <div>Have a nice day and visit <%= link_to 'us', root_url %>).</div>
+    </div>
   </body>
 </html>
