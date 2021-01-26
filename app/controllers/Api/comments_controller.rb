@@ -6,11 +6,13 @@ class Api::CommentsController < ActionController::API
   end
 
   def update
-
+    json = params.require(:comment).permit(:body, :rating, :id)
+    comment = Comment.find(json[:id])
+    comment.update(json) if comment.user_id == current_user.id
   end
 
-  def destroy
-
+  def destroy    
+    Comment.destroy(params[:id]) if Comment.find(params[:id]).user_id == current_user.id
   end
 
 end
