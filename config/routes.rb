@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get '/categories', to: 'api/categories#index'
   post '/order', to: 'api/orders#create'
 
+  post '/comments', to: 'api/comments#create'
+  delete '/comments', to: 'api/comments#destroy'
+  put '/comments', to: 'api/comments#update'
+
   root = 'home#index'
 
   root to: root

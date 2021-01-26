@@ -24,7 +24,24 @@ class Api::ProductsController < ActionController::API
 
   def show
     product = Product.find_by(url_name: params[:name])
-    render json: { product: product.attributes.merge(image: product.image&.url ) }
+    comments_arr = product.comments.map do |c|
+      {
+        id: c.id,
+        body: c.body,
+        rating: c.rating.round.to_i,
+        email: c.user.email       
+      }
+    end     
+    render json: { 
+      product: product.attributes.merge( image: product.image&.url),
+      comments: comments_arr,
+      new_comment: allow_create_comment?(product) 
+    }
+  end
+
+  def allow_create_comment?(product)
+    return false unless current_user
+    product.orders.where(email: current_user.email).exists? && !product.comments.where(user_id: current_user.id).exists?
   end
 
   def get_list
