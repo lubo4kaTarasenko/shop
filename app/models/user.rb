@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :comments
+  has_many :comments, dependent: :destroy
  
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,  :omniauthable
@@ -14,7 +14,8 @@ class User < ApplicationRecord
     save
   end
 
-  def self.from_omniauth(auth)  
+  def self.from_omniauth(auth)
+    Rails.logger.info(auth.inspect)  
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.provider = auth.provider
       user.uid = auth.uid
