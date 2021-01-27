@@ -20,7 +20,7 @@ class Product < ApplicationRecord
   end
 
   def avg_rating
-    product.comments.map(&:rating).sum / product.comments.size).round(1) 
+    (product.comments.map(&:rating).sum / product.comments.size).round(1) 
   rescue 
     nil
   end
