@@ -28,12 +28,17 @@ gem 'rack-cors', require: 'rack/cors'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'kaminari'
-gem 'devise'
+# gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'pry'
 gem 'activeadmin'
 gem 'cloudinary'
 gem 'carrierwave'
 gem 'country_select', '~> 4.0'
+gem 'omniauth-github', '> 1.0.0'
+
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

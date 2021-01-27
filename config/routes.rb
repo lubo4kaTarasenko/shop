@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   get '/products', to: 'api/products#index'
   get '/product', to: 'api/products#show'
   get '/categories', to: 'api/categories#index'
