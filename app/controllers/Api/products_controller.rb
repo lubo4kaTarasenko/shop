@@ -12,7 +12,7 @@ class Api::ProductsController < ActionController::API
     end
 
     pages_count = (scp.count.to_f / PAGE).ceil
-    Rails.logger.info("user:" + current_user.inspect)
+    Rails.logger.info('user:' + current_user.inspect)
     if current_user
       user = {
         token: current_user.token,
@@ -29,18 +29,19 @@ class Api::ProductsController < ActionController::API
         id: c.id,
         body: c.body,
         rating: c.rating.round.to_i,
-        email: c.user.email       
+        email: c.user.email
       }
-    end     
-    render json: { 
-      product: product.attributes.merge( image: product.image&.url, rating: product.avg_rating),
+    end
+    render json: {
+      product: product.attributes.merge(image: product.image&.url, rating: product.avg_rating),
       comments: comments_arr,
-      new_comment: allow_create_comment?(product) 
+      new_comment: allow_create_comment?(product)
     }
   end
 
   def allow_create_comment?(product)
     return false unless current_user
+
     product.orders.where(email: current_user.email).exists? && !product.comments.where(user_id: current_user.id).exists?
   end
 
@@ -49,12 +50,12 @@ class Api::ProductsController < ActionController::API
     price_to = params[:pr_t]
     scp = Product.search(params[:q]).includes(:category).includes(:subcategory)
     scp = scp.where('price >= ?', price_from.to_f) if price_from.present? && price_from != 'undefined'
-    scp = scp.where('price <= ?', price_to.to_f)  if price_to.present? && price_to != 'undefined'    
+    scp = scp.where('price <= ?', price_to.to_f) if price_to.present? && price_to != 'undefined'
 
     if params[:sc].present? && params[:sc] != 'undefined'
-      scp = scp.where(subcategory_id: Subcategory.find_by(name: params[:sc]).id) 
-    else
-      scp = scp.where(category_id: params[:c].to_i) if params[:c].present? && params[:c] != 'undefined'
+      scp = scp.where(subcategory_id: Subcategory.find_by(name: params[:sc]).id)
+    elsif params[:c].present? && params[:c] != 'undefined'
+      scp = scp.where(category_id: params[:c].to_i)
     end
 
     if params[:f] == 'A...Z'

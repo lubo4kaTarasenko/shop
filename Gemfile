@@ -29,15 +29,13 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'kaminari'
 # gem 'devise'
-gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
-gem 'pry'
 gem 'activeadmin'
-gem 'cloudinary'
 gem 'carrierwave'
+gem 'cloudinary'
 gem 'country_select', '~> 4.0'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'omniauth-github', '> 1.0.0'
-
-
+gem 'pry'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

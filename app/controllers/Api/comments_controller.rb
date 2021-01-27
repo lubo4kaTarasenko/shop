@@ -11,8 +11,7 @@ class Api::CommentsController < ActionController::API
     comment.update(json) if comment.user_id == current_user.id
   end
 
-  def destroy    
+  def destroy
     Comment.destroy(params[:id]) if Comment.find(params[:id]).user_id == current_user.id
   end
-
 end

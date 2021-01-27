@@ -1,5 +1,4 @@
 ActiveAdmin.register Order do
-
   show do |o|
     attributes_table do
       row :id
@@ -10,7 +9,7 @@ ActiveAdmin.register Order do
       row :email
       row :post_office
       row :total_price
-      
+
       attributes_table_for o.order_products do
         row :id
         row :name
@@ -18,5 +17,4 @@ ActiveAdmin.register Order do
       end
     end
   end
-  
 end

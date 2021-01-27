@@ -54,7 +54,6 @@ subcategories_h.map do |sc|
   )
 end
 
-
 products = 1000.times.map do
   category = categories.sample
   Product.create(
@@ -68,4 +67,6 @@ products = 1000.times.map do
     }
   )
 end
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+end

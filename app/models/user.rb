@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_many :comments, dependent: :destroy
- 
+
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,  :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable
 
   after_create :create_token
 
@@ -20,7 +20,7 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.email = auth.info.email
       user.name = auth.info.name
-      user.password = Devise.friendly_token[0,20]
+      user.password = Devise.friendly_token[0, 20]
       user.password_confirmation = user.password
     end
   end

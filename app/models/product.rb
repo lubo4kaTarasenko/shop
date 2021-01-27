@@ -1,13 +1,12 @@
 class Product < ApplicationRecord
   belongs_to :category
   belongs_to :subcategory
-  has_many :comments, dependent: :destroy  
+  has_many :comments, dependent: :destroy
   has_many :order_products
   has_many :orders, through: :order_products
-  
+
   mount_uploader :image, ImageUploader
   before_save :add_url_name
-
 
   # paginates_per 28
 
@@ -20,8 +19,8 @@ class Product < ApplicationRecord
   end
 
   def avg_rating
-    ((self.comments.map(&:rating).sum) / self.comments.size).round(1) 
-  rescue 
+    (comments.map(&:rating).sum / comments.size).round(1)
+  rescue StandardError
     nil
   end
 
@@ -30,5 +29,4 @@ class Product < ApplicationRecord
   def add_url_name
     self.url_name = name.downcase.gsub(' ', '-')
   end
-
 end
