@@ -19,6 +19,12 @@ class Product < ApplicationRecord
     end
   end
 
+  def avg_rating
+    product.comments.map(&:rating).sum / product.comments.size).round(1) 
+  rescue 
+    nil
+  end
+
   private
 
   def add_url_name

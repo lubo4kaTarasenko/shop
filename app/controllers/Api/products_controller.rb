@@ -33,7 +33,7 @@ class Api::ProductsController < ActionController::API
       }
     end     
     render json: { 
-      product: product.attributes.merge( image: product.image&.url),
+      product: product.attributes.merge( image: product.image&.url, rating: product.avg_rating),
       comments: comments_arr,
       new_comment: allow_create_comment?(product) 
     }
