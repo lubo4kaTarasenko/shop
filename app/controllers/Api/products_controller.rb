@@ -1,9 +1,8 @@
 class Api::ProductsController < ActionController::API
-  PAGE = 24
 
   def index
     scp = get_list.order(updated_at: :desc)
-    products = scp.page(params[:p]).per(PAGE).map do |p|
+    products = scp.page(params[:p]).per(20).map do |p|
       p.attributes.merge(
         image: p.image&.url,
         category: p.category.name,
@@ -36,8 +35,8 @@ class Api::ProductsController < ActionController::API
       product: product.attributes.merge(
               image: product.image&.url,
               rating: product.avg_rating, 
-              category: product.category,
-              subcategory: product.subcategory),
+              category: product.category.name,
+              subcategory: product.subcategory.name),
       comments: comments_arr,
       new_comment: allow_create_comment?(product)
     }
