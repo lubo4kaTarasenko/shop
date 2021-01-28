@@ -10,7 +10,7 @@ class Api::ProductsController < ActionController::API
       )
     end
 
-    pages_count = (scp.count.to_f / PAGE).ceil
+    pages_count = (scp.count.to_f / 20).ceil
     Rails.logger.info('user:' + current_user.inspect)
     if current_user
       user = {
