@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   mount_uploader :image, ImageUploader
   before_save :add_url_name
 
-  #paginates_per 20
+  # paginates_per 20
 
   def self.search(pattern)
     if pattern.blank?
