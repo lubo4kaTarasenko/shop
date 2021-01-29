@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        taken: "or password is invalid"
