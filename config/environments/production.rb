@@ -30,7 +30,7 @@ Rails.application.configure do
     port: 587,
     domain: 'example.com',
     user_name: 'shop67947@gmail.com',
-    password: Digest::MD5.hexdigest('bulya'),
+    password: ENV['MAILER_SECRET'],
     authentication: 'plain',
     enable_starttls_auto: true
   }
