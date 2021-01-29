@@ -1,6 +1,6 @@
 class Api::CategoriesController < ActionController::API
   def index
-    categories = Category.all.includes(:subcategories).map do |c|
+    categories = Category.includes(:subcategories).map do |c|
       c.attributes.merge(
         subcategories: c.subcategories.map(&:name)
       )
