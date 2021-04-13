@@ -47,7 +47,7 @@ values = {
   "status":"accept",
   "time": Time.now.to_i,
 }
-render json: values.merge(signature: WayforPay::EncryptField.new(values.keys, values).call)
+render json: values.merge(signature: Wayforpay::EncryptField.new(values.keys, values).call)
 
   end
 
