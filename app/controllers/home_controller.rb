@@ -1,10 +1,16 @@
 class HomeController < ApplicationController
   def index
 
-Logger.info(params.inspect)
-Logger.info(params)
+#Logger.info(params.inspect)
+#Logger.info(params)
 
     html = File.read(Rails.root.join('public/index.html').to_s)
     render html: html.html_safe
+  end
+
+  def webhook
+    r_body = JSON.parse(request.body.read)
+    Rails.logger.info(r_body)
+    Rails.logger.info(params.inspect)    
   end
 end

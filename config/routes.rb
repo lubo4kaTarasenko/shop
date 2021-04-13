@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   post '/comments', to: 'api/comments#create'
   delete '/comments', to: 'api/comments#destroy'
   put '/comments', to: 'api/comments#update'
-post '/webhook', to: 'home#index'
+post '/webhook', to: 'home#webhook'
 
   root = 'home#index'
 
